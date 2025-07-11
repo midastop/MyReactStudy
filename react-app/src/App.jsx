@@ -44,21 +44,30 @@ function Header(props) {
 }
 
 function App() { 
+  const [mode, setMode] = useState("WELCOME");
+  //console.log("_mode : ", _mode);  
   const topics = [
     {id: 1, title: "html", boyd: "html is ..."},
     {id: 2, title: "css", boyd: "css is ..."},
     {id: 3, title: "javascript", boyd: "javascript is ..."},
   ];
+
+  let content = null;
+  if(mode === 'WELCOME') {
+    content = <Article title="Welcome" body="Hello, WEB" />
+  } else if(mode === 'READ') {
+    content = <Article title="Read" body="Hello, Read" />
+  }
   
   return (
     <div>
       <Header title="WEB" onChangeMode={() => {
-        alert('Header');
+        setMode('WELCOME');
       }}/>
       <Nav topics={topics} onChangeMode={(id) => {
-        alert(id);
+        setMode('READ');
       }}/>
-      <Article title="Welcome" body="Hello, WEB" />
+      {content}
     </div>
   )
 }
