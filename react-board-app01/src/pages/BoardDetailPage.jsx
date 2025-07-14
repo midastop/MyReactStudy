@@ -3,7 +3,7 @@ import { Link, useSearchParams, useNavigate } from 'react-router-dom';
 import axios from 'axios';
 import { dateFormat } from '../utils/utils';
 
-export default function BoardListPage() { 
+export default function BoardDetailPage() { 
 
   // 쿼리 스트링 읽어오기 useSearchParams Hook
   const [searchParams, setSearchParams] = useSearchParams();
@@ -12,7 +12,8 @@ export default function BoardListPage() {
   // board는 객체이므로 초기 값을 빈 객체(Empty Object)로 지정
   const [board, setBoard] = useState({});
   const getBoard = async () => {
-    const res = await axios.get(`http://localhost:3010/boardDetail?no=${no}`);
+    // 백엔드 서버에서 경로 변수 방식으로 데이터를 처리하므로 데이터를 경로에 포함 시킴
+    const res = await axios.get(`http://localhost:3010/boards/${no}`);
       // 백엔드 서버에서 가져온 데이터를 board state에 설정
       setBoard(res.data);
   }
@@ -35,7 +36,8 @@ export default function BoardListPage() {
   // 해야한다. 이러면 폼을 렌더링하는 React 컴포넌트는 폼에서 발생하는
   // 사용자 입력값을 제어하게 되며 이런 방식으로 React에 의해 값이 제어되는
   // 입력 폼 엘리먼트를 "제어 컴포넌트 (controlled component)"라고 한다.
-  // https://ko.legacy.reactjs.org/docs/forms.html
+  // https://ko.react.dev/reference/react-dom/components/form
+  // https://ko.legacy.reactjs.org/docs/forms.html  
   const [pass, setPass] = useState("");
   const handlePassChange = e => {
     setPass(e.target.value);
@@ -54,7 +56,7 @@ export default function BoardListPage() {
 
     if(isUpdate) { // 수정 폼 요청하기
       // 백엔드 서버에서 경로 변수 방식으로 데이터를 처리하므로 데이터를 경로에 포함 시킴
-      await axios.get(`http://localhost:3010/update/${no}/${pass}`)
+      await axios.get(`http://localhost:3010/boards/${no}/${pass}`)
         .then((res) => {
           console.log(res.data);
           if(!res.data.result) {
@@ -70,8 +72,9 @@ export default function BoardListPage() {
         });
 
     } else { // 삭제하기
-      // 백엔드 서버에서 post 방식으로 처리하기 때문에 요청 본문에 데이터를 포함 시킴       
-      await axios.post(`http://localhost:3010/delete`, { no: no, pass: pass })
+      // 백엔드 서버에서 쿼리스트링 방식으로 데이터를 처리하므로 params 속성을 사용함
+      // DELETE 방식 요청에서 본문에 데이터를 추가하려면 params 대신 data 속성을 사용하면 됨     
+      await axios.delete(`http://localhost:3010/boards`, { params: { no: no, pass: pass }})
         .then((res) => {
           console.log(res.data);
           if(!res.data.result) {

@@ -14,51 +14,45 @@ function BoardListPage() {
 	}, []);
 
 	return (
-		<div class="row my-5" id="global-content">
-			<div class="col-10 offset-1">
-				<div class="row text-center">
-					<div class="col">
-						<h2 class="fs-3 fw-bold">게시 글 리스트</h2>
+		<> 
+  		{/* content */}
+			<div className="row my-5" id="global-content">
+				<div className="col-10 offset-1">
+					<div className="row text-center">
+						<div className="col">
+							<h2 className="fs-3 fw-bold">게시 글 리스트</h2>
+						</div>
+					</div>  		
+					<form name="searchForm" id="searchForm" action="#" 
+						className="row justify-content-center my-3">
+						<div className="col-auto">
+							<select name="type" className="form-select">
+								<option value="title">제목</option>
+								<option value="writer">작성자</option>
+								<option value="content">내용</option>
+							</select>
+						</div>
+						<div className="col-4">
+							<input type="text" name="keyword" className="form-control"/>
+						</div>
+						<div className="col-auto">
+							<input type="submit" value="검 색" className="btn btn-primary"/>
+						</div>
+					</form>  		
+					<div className="row">
+						<div className="col text-end">
+							<a  className="btn btn-outline-success">글쓰기</a>
+						</div>
 					</div>
-				</div>  		
-				<form name="searchForm" id="searchForm" action="#" 
-					class="row justify-content-center my-3">
-					<div class="col-auto">
-						<select name="type" class="form-select">
-							<option value="title">제목</option>
-							<option value="writer">작성자</option>
-							<option value="content">내용</option>
-						</select>
+					<div className="row my-3">  			
+						<div className="col">
+							<BoardListTable bList={ boardList } />
+						</div>  			
 					</div>
-					<div class="col-4">
-						<input type="text" name="keyword" class="form-control"/>
-					</div>
-					<div class="col-auto">
-						<input type="submit" value="검 색" class="btn btn-primary"/>
-					</div>
-				</form>  		
-				<div class="row">
-					<div class="col text-end">
-						<a  class="btn btn-outline-success">글쓰기</a>
-					</div>
-				</div>
-				<div class="row my-3">  			
-					<div class="col">
-						<table class="table">
-							<thead>
-								<tr class="table-dark">
-									<th>NO</th>
-									<th>제목</th>
-									<th>작성자</th>
-									<th>작성일</th>
-									<th>조회수</th>
-								</tr>
-							</thead>
-							
-						</table>
-					</div>  			
 				</div>
 			</div>
-		</div>
+		</>		
 	);
 }			
+
+export default BoardListPage;

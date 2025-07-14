@@ -1,7 +1,9 @@
 import './App.css';
 import axios from 'axios';
 import {useState, useEffect} from 'react';
-import BoardListTable from './components/BoardListTable';
+import BoardListPage from './pages/BoardListPage';
+import Header from './components/Header';
+import Footer from './components/Footer';
 
 function App() {
   //state 배열이므로 초기 값을 빈 배열을 지정
@@ -18,8 +20,10 @@ function App() {
   }, []);
   
   return (
-    <div className="App">
-      <BoardListTable bList={boardList} />
+    <div className="container">
+      <Header />
+      <BoardListPage />
+      <Footer />
     </div>
   );
 }

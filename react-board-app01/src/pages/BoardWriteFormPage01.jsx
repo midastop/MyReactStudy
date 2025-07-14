@@ -11,6 +11,7 @@ export default function BoardWriteFormPage() {
   // 이렇게 state로 설정해 놓으면 폼을 렌더링하는 React 컴포넌트는 폼에서
   // 사용자가 입력한 값을 제어하게 되며 이런 방식으로 React에 의해 값이 제어되는
   // 입력 폼 엘리먼트를 "제어 컴포넌트 (controlled component)"라고 한다.
+  // https://ko.react.dev/reference/react-dom/components/form
   // https://ko.legacy.reactjs.org/docs/forms.html
   const [ values, setValues ] = useState({
     writer: "",
@@ -73,7 +74,7 @@ export default function BoardWriteFormPage() {
 
     // 유효성 검사를 통과하면 폼에 입력된 데이터를 읽어와 요청 본문에 포함시켜서
     // 백엔드 서버로 요청을 보내고 게시 글 쓰기가 완료되면 게시 글 리스트로 이동
-    await axios.post("http://localhost:3010/writeBoard", values )
+    await axios.post("http://localhost:3010/boards", values )
       .then((res) => {
         // 게시 글 쓰기 작업이 성공하면
         // /boardList로 이동하면서 현재 페이지를 history 기록에 남기지 않음

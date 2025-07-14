@@ -9,10 +9,10 @@ export default function BoardUpdateFormPage() {
   const [searchParams, setSearchParams] = useSearchParams();
   const no = searchParams.get("no");  
 
-  // 폼의 여러 입력 값을 하나의 State(상태)로 다루기 위해 useState() Hook 사용
-  // React에 의해서 사용자가 입력한 값을 제어하기 위해서 State(상태)로 설정한다.
-  // 이렇게 React에 의해 값이 제어되는 입력 폼 엘리먼트를 "제어 컴포넌트
-  // (controlled component)"라고 한다.
+  // 폼의 여러 입력 값을 하나의 State(상태)로 다루기 위해 객체로 만들어 useState()에 지정함
+  // 사용자가 입력한 값을 제어하기 위해서 State(상태)를 사용하는데 이렇게 React에 의해
+  // 값이 제어되는 입력 폼 엘리먼트를 "제어 컴포넌트(controlled component)"라고 한다.
+  // https://ko.react.dev/reference/react-dom/components/form
   // https://ko.legacy.reactjs.org/docs/forms.html
   const [ board, setBoard ] = useState({
     no: "",
@@ -23,8 +23,9 @@ export default function BoardUpdateFormPage() {
   });
  
   const getBoard = async () => {
+    // 백엔드 서버에서 경로 변수 방식으로 데이터를 처리하므로 데이터를 경로에 포함 시킴
     // 앞에서 비밀번호를 체크하고 넘어왔기 때문에 게시 글 정보만 읽어 왔음
-    const res = await axios.get(`http://localhost:3010/boardDetail?no=${no}`);
+    const res = await axios.get(`http://localhost:3010/boards/${no}`);
       
       // 비밀번호는 제외하고 화면에 표시
       res.data.pass = "";      
@@ -75,7 +76,7 @@ export default function BoardUpdateFormPage() {
   // useCallback() Hook을 사용해 필드 값이 변경될 때 마다 유효성 검사를 수행하는
   // 함수를 다시 할당 한다. useCallback()은 함수를 메모이제이션(memoization)하기
   // 위해서 사용되는 Hook으로 첫번째 인자로 넘어온 함수를, 두번째 인자로 넘어온
-  // 배열 요소의 값이 변경될 때까지 메모리에 저장해놓고 재사용할 수 있게 해주는
+  // 배열 요소의 값이 변경될 때까지 메모리에 저장해 놓고 재사용할 수 있게 해주는
   // Hook 이다. 예를 들어 React 컴포넌트 함수 안에 a 함수가 선언이 되어 있다면
   // 이 a 함수는 해당 컴포넌트가 랜더링될 때 마다 새롭게 함수가 생성된다. 하지만
   // useCallback()을 사용하면, 해당 컴포넌트가 랜더링되더라도 그 함수가 의존하는
@@ -139,8 +140,8 @@ export default function BoardUpdateFormPage() {
     }
 
     // 유효성 검사를 통과하면 폼에 입력된 데이터를 읽어와 요청 본문에 포함시켜서
-    // 백엔드 서버로 요청을 보내고 게시 글 쓰기가 완료되면 게시 글 리스트로 이동
-    await axios.post("http://localhost:3010/update", board )
+    // 백엔드 서버로 요청을 보내고 게시 글 수정이 완료되면 게시 글 리스트로 이동
+    await axios.put("http://localhost:3010/boards", board )
       .then((res) => {
         console.log(res.data);
         if(!res.data.result) {

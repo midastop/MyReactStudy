@@ -3,7 +3,7 @@ import { Link, useSearchParams } from 'react-router-dom';
 import axios from 'axios';
 import { dateFormat } from '../utils/utils';
 
-export default function BoardListPage() { 
+export default function BoardDetailPage() { 
 
   // 쿼리 스트링 읽어오기 useSearchParams Hook
   const [searchParams, setSearchParams] = useSearchParams();
@@ -12,7 +12,8 @@ export default function BoardListPage() {
   // board는 객체이므로 초기 값을 빈 객체(Empty Object)로 지정
   const [board, setBoard] = useState({});
   const getBoard = async () => {
-    const res = await axios.get(`http://localhost:3010/boardDetail?no=${no}`);
+    // 백엔드 서버에서 경로 변수 방식으로 데이터를 처리하므로 데이터를 경로에 포함 시킴
+    const res = await axios.get(`http://localhost:3010/boards/${no}`);
       // 백엔드 서버에서 가져온 데이터를 board state에 설정
       setBoard(res.data);
   }

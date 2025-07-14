@@ -140,16 +140,15 @@ app.put("/boards", async(req, res) => {
 
 // 게시 글 삭제 요청을 처리하는 라우터
 app.delete("/boards", async (req, res) => {  
-  // Query String 방식으로 들어오는 데이터는 req.query 속성으로 받을 수 있음
-  // req 객체의 query 속성으로 no라는 파라미터를 읽어서 DB에서 게시 글 조회
-  const [board] = await boardDB.getBoard(req.query.no);
+  // 요청 본문으로 들어오는 데이터를 req.body로 받으면 객체로 받음
+  const [board] = await boardDB.getBoard(req.body.no);  
 
-  // DB에 입력된 비밀번호와 사용자가 입력한 비밀번호가 같은지 체크해서
-  if(board.pass != req.query.pass) { // 틀리면 result는 false를 JSON으로 응답      
+  // 비밀번호를 체크해서
+  if(board.pass != req.body.pass) { // 틀리면 result는 false를 JSON으로 응답      
     res.json({ result: false });
 
   } else { // 맞으면 게시 글을 삭제하고  
-    await boardDB.deleteBoard(req.query.no);
+    await boardDB.deleteBoard(req.body.no);
     
     // 게시 글 삭제가 완료되면 result는 true를 JSON으로 응답
     res.json({ result: true });
