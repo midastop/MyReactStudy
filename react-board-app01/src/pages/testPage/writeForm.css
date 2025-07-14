@@ -1,0 +1,12 @@
+.errors::-webkit-input-placeholder {
+  color: red;
+}
+.errors::-moz-input-placeholder {
+  color: red;
+}
+.errors::placeholder {
+  color: red;
+}
+.errors:placeholder-shown {
+  border: 3px solid red;
+}
