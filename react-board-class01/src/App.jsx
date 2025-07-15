@@ -9,6 +9,7 @@ import BoardWriteFormPage from './pages/BoardWriterFormPage';
 import BoardUpdateFormPage from './pages/BoardUpdateFormPage';
 import NavigatorTest01 from './navigator/NavigatorTest01'
 import NavigatorTest02 from './navigator/NavigatorTest02';
+import FormTest03 from './pages/formTest01/FormTest03';
 import NotFoundPage from './pages/NotFoundPage';
 
 function App() {
@@ -24,6 +25,7 @@ function App() {
           <Route path="/boardUpdate" element={ <BoardUpdateFormPage /> } />          
           <Route path="/navigate01" element={ <NavigatorTest01 /> } />
           <Route path="/navigate02" element={ <NavigatorTest02 /> } />
+          <Route path="/formTest03" element={ <FormTest03 /> } />
           <Route path="*" element={ <NotFoundPage /> } />
         </Routes>
         <Footer />
