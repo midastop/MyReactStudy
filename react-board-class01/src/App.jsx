@@ -1,31 +1,35 @@
-import './App.css';
-import axios from 'axios';
-import {useState, useEffect} from 'react';
-import BoardListPage from './pages/BoardListPage';
+import './App.css'
+import { BrowserRouter, Routes, Route } from 'react-router-dom';
+
 import Header from './components/Header';
 import Footer from './components/Footer';
+import BoardListPage from './pages/BoardListPage';
+import BoardDetailPage from './pages/BoardDetailPage';
+import BoardWriteFormPage from './pages/BoardWriterFormPage';
+import BoardUpdateFormPage from './pages/BoardUpdateFormPage';
+import NavigatorTest01 from './navigator/NavigatorTest01'
+import NavigatorTest02 from './navigator/NavigatorTest02';
+import NotFoundPage from './pages/NotFoundPage';
 
 function App() {
-  //state 배열이므로 초기 값을 빈 배열을 지정
-  const [boardList, setBoardList] = useState([]);
-
-  // 게시 글 리스트를 백엔드 서버에서 읽어오는 함수
-  const getBoardList = async () => {
-    const res = await axios.get("http://localhost:3010/");
-    setBoardList(res.data);
-  }
-  
-  useEffect(() => {
-    getBoardList();
-  }, []);
-  
   return (
-    <div className="container">
-      <Header />
-      <BoardListPage />
-      <Footer />
+    <div className='container'>
+      <BrowserRouter>
+        <Header />
+        <Routes>
+          <Route path="/" element={ <BoardListPage /> } />
+          <Route path="/boardList" element={ <BoardListPage /> } />
+          <Route path="/boardDetail" element={ <BoardDetailPage /> } />
+          <Route path="/boardWrite" element={ <BoardWriteFormPage /> } />
+          <Route path="/boardUpdate" element={ <BoardUpdateFormPage /> } />          
+          <Route path="/navigate01" element={ <NavigatorTest01 /> } />
+          <Route path="/navigate02" element={ <NavigatorTest02 /> } />
+          <Route path="*" element={ <NotFoundPage /> } />
+        </Routes>
+        <Footer />
+      </BrowserRouter>
     </div>
-  );
+  )
 }
 
-export default App;
+export default App

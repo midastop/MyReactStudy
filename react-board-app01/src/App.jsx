@@ -8,9 +8,8 @@ import BoardWriteFormPage from './pages/BoardWriteFormPage';
 import BoardUpdateFormPage from './pages/BoardUpdateFormPage';
 import NavigateTest01 from './pages/testNavigate/NavigateTest01';
 import NavigateTest02 from './pages/testNavigate/NavigateTest02';
-import FormTest01 from './pages/formTest/FormTest04';
-import TestForm01 from './pages/testForm/TestForm01';
-
+import TestForm01 from './pages/form01/TestForm01';
+import FormTest01 from './pages/form02/FormTest04';
 import NotFoundPage from './pages/NotFoundPage';
 
 function App() {
@@ -29,8 +28,8 @@ function App() {
           <Route path="/boardDetail" element={ <BoardDetailPage /> } />            
           <Route path="/boardWrite" element={ <BoardWriteFormPage /> } />
           <Route path="/boardUpdate" element={ <BoardUpdateFormPage /> } />
-          <Route path="/formTest" element={ <FormTest01 /> } />
-          <Route path="/testForm" element={ <TestForm01 /> } />
+          <Route path="/form01" element={ <TestForm01 /> } />
+          <Route path="/form02" element={ <FormTest01 /> } />          
           <Route path="/navigate01" element={ <NavigateTest01 /> } />
           <Route path="/navigate02" element={ <NavigateTest02 /> } />          
           <Route path="*" element={ <NotFoundPage /> } />

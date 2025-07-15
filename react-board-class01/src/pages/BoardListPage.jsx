@@ -1,20 +1,21 @@
-import { useState, useEffect} from 'react';
-import axios from 'axios';
+import { Link } from 'react-router-dom'
+import { useState, useEffect } from 'react'
+import axios from 'axios'
 import BoardListTable from '../components/BoardListTable';
 
 function BoardListPage() {
-	const [boardList, setBoardList] = useState([]);
-	const getBoardList = async() => {
-		const res = await axios.get("http://localhost:3010/");
-		setBoardList(res.data);
-	}
-
-	useEffect(() => {
-		getBoardList();
-	}, []);
+  const [boardList, setBoardList] = useState([]);
+  const getBoardList = async () => {
+    const res = await axios.get("http://localhost:3010/");
+    setBoardList(res.data);
+    console.log(res.data);
+  }
+  useEffect(() => {
+    getBoardList();
+  }, []);  
 
 	return (
-		<> 
+		<>
   		{/* content */}
 			<div className="row my-5" id="global-content">
 				<div className="col-10 offset-1">
@@ -41,18 +42,18 @@ function BoardListPage() {
 					</form>  		
 					<div className="row">
 						<div className="col text-end">
-							<a  className="btn btn-outline-success">글쓰기</a>
+							<Link to="/boardWrite" className="btn btn-outline-success">글쓰기</Link>
 						</div>
 					</div>
 					<div className="row my-3">  			
 						<div className="col">
-							<BoardListTable bList={ boardList } />
+							<BoardListTable bList={boardList} />
 						</div>  			
 					</div>
 				</div>
 			</div>
-		</>		
-	);
-}			
+		</>	
+	)		
+}
 
 export default BoardListPage;
