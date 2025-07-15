@@ -2,7 +2,7 @@
 // React에 의해 값이 제어되는 입력 폼 엘리먼트를 제어 컴포넌트(Controled Component)라고 함
 import { useState } from 'react'
 
-export default function TestForm() {
+export default function TestForm01() {
 
   // 개별적으로 useState()를 사용
   const [writer, setWriter] = useState("");

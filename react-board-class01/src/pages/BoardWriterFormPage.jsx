@@ -1,3 +1,6 @@
+import { useState } from 'react';
+import { Link, useNavigate } from 'react-router-dom';
+
 export default function BoardWriteFormPage() {
   return (
     <div className="row my-5" id="global-content">
@@ -8,28 +11,27 @@ export default function BoardWriteFormPage() {
           </div>
         </div>
         <form name="writeForm" action="writeBoard" id="writeForm" 
-          class="row g-3 border-primary" method="post">
-            <div class="col-4 offset-md-2">
-              <label htmlFor="writer" class="form-label">글쓴이</label>
-              <input type="text" class="form-control" name="writer" id="writer" 
+          className="row g-3 border-primary" method="post">
+            <div className="col-4 offset-md-2">
+              <label htmlFor="writer" className="form-label">글쓴이</label>
+              <input type="text" className="form-control" name="writer" id="writer" 
                 placeholder="작성자를 입력해 주세요" />
             </div>
-            <div class="col-4 ">
-              <label htmlFor="pass" class="form-label">비밀번호</label>
-              <input type="password" class="form-control" name="pass" id="pass" />
+            <div className="col-4 ">
+              <label htmlFor="pass" className="form-label">비밀번호</label>
+              <input type="password" className="form-control" name="pass" id="pass" />
             </div>
-            <div class="col-8 offset-md-2">
-              <label htmlFor="title" class="form-label">제 목</label>
-              <input type="text" class="form-control" name="title"  id="title" />
+            <div className="col-8 offset-md-2">
+              <label htmlFor="title" className="form-label">제 목</label>
+              <input type="text" className="form-control" name="title"  id="title" />
             </div>
-            <div class="col-8 offset-md-2">
-              <label htmlFor="content" class="form-label">내 용</label>
-              <textarea class="form-control" name="content" id="content" rows="10"></textarea>
+            <div className="col-8 offset-md-2">
+              <label htmlFor="content" className="form-label">내 용</label>
+              <textarea className="form-control" name="content" id="content" rows="10"></textarea>
             </div>	
-            <div class="col-8 offset-md-2 text-center mt-5">
-              <input type="submit" value="등록하기" class="btn btn-primary"/>
-              &nbsp;&nbsp;<input type="button" value="목록보기" 
-                onclick="location.href='boardList'" class="btn btn-primary"/>
+            <div className="col-8 offset-md-2 text-center mt-5">
+              <input type="submit" value="등록하기" className="btn btn-primary"/>
+              &nbsp;&nbsp;<Link to="/boardList" className="btn btn-primary">목록보기</Link>
             </div>	
         </form>
       </div>
